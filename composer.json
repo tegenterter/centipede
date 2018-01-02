@@ -1,0 +1,28 @@
+{
+    "name": "thibaut-vandenbussche/centipede",
+    "version": "1.0.0",
+    "author": {
+        "name": "Thibaut Vandenbussche",
+        "email": "thibaut@vandenbussche.co",
+        "homepage": "https://thibaut.sh"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Centipede\\": "src/Centipede/"
+        }
+    },
+    "require": {
+        "php": "^7.1",
+        "psr/container": "dev-master",
+        "aws/aws-sdk-php": "^3.30",
+        "guzzlehttp/guzzle": "~6.0",
+        "symfony/yaml": "^3.2",
+        "sentry/sentry": "^1.7",
+        "bugsnag/bugsnag": "^3.0"
+    },
+    "dist": {
+        "url": "git@github.com:thibaut-vandenbussche/centipede.git",
+        "type": "git"
+    }
+}
