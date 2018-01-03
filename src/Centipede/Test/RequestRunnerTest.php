@@ -24,6 +24,7 @@ class RequestRunnerTest extends AbstractTestCase
             function (Exception $exception) {
                 $this->fail($exception->getMessage());
             },
+            [],
             new Request('GET', 'https://www.google.com')
         );
     }
@@ -33,10 +34,6 @@ class RequestRunnerTest extends AbstractTestCase
      */
     public function testDisallowRedirects() : void
     {
-        $this->client->setOptions([
-            'allow_redirects' => false,
-        ]);
-
         $this->client->run(
             function (ResponseInterface $response) {
                 $this->assertEquals(301, $response->getStatusCode());
@@ -44,6 +41,9 @@ class RequestRunnerTest extends AbstractTestCase
             function (Exception $exception) {
                 $this->fail($exception->getMessage());
             },
+            [
+                'allow_redirects' => false,
+            ],
             new Request('GET', 'http://thibaut.sh')
         );
     }
@@ -53,10 +53,6 @@ class RequestRunnerTest extends AbstractTestCase
      */
     public function testAllowRedirects() : void
     {
-        $this->client->setOptions([
-            'allow_redirects' => true,
-        ]);
-
         $this->client->run(
             function (ResponseInterface $response) {
                 $this->assertEquals(200, $response->getStatusCode());
@@ -64,6 +60,9 @@ class RequestRunnerTest extends AbstractTestCase
             function (Exception $exception) {
                 $this->fail($exception->getMessage());
             },
+            [
+                'allow_redirects' => true,
+            ],
             new Request('GET', 'http://thibaut.sh')
         );
     }
