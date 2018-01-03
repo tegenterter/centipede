@@ -115,7 +115,7 @@ final class Client
      * @param array<string,mixed> $options
      * @param Request[] $requests
      */
-    public function run(callable $responseCallback, ?callable $errorCallback, array $options, Request... $requests) : void
+    public function run(callable $responseCallback, ?callable $errorCallback, ?array $options, Request... $requests) : void
     {
         if (empty($requests)) {
             return;
@@ -128,7 +128,7 @@ final class Client
         $queue = new SimpleQueueingService();
         $queue->addMessages($messages);
 
-        $this->process($queue, $responseCallback, $errorCallback, $options);
+        $this->process($queue, $responseCallback, $errorCallback, $options ?: []);
     }
 
     /**
