@@ -45,15 +45,16 @@ final class Client
      */
     private $client;
 
-    public function __construct()
+    /**
+     * @param array<string,mixed> $options
+     */
+    public function __construct(array $options = [])
     {
         $this->services = [];
 
         $this->client = new GuzzleClient();
 
-        $this->setOptions([
-            'allow_redirects' => false,
-        ]);
+        $this->setOptions($options);
     }
 
     /**
@@ -187,7 +188,7 @@ final class Client
          */
         $getPromises = function () use ($queue, $client, $messages) {
             foreach ($messages as $message) {
-                $options = [];
+                $options = $this->getOptions();
 
                 if ($proxy = $this->getRandomProxy()) {
                     $options[RequestOptions::PROXY] = (string) $proxy;
