@@ -31,11 +31,6 @@ use Exception;
 final class Client
 {
     /**
-     * @var array
-     */
-    private $options;
-
-    /**
      * @var AbstractService[]
      */
     private $services;
@@ -46,34 +41,13 @@ final class Client
     private $client;
 
     /**
-     * @param array<string,mixed> $options
+     * @param array<string,mixed> $config
      */
-    public function __construct(array $options = [])
+    public function __construct(array $config = [])
     {
         $this->services = [];
 
-        $this->client = new GuzzleClient();
-
-        $this->setOptions($options);
-    }
-
-    /**
-     * @return array
-     */
-    public function getOptions() : array
-    {
-        return $this->options;
-    }
-
-    /**
-     * @param array $options
-     * @return Client
-     */
-    public function setOptions(array $options) : self
-    {
-        $this->options = $options;
-
-        return $this;
+        $this->client = new GuzzleClient($config);
     }
 
     /**
@@ -138,9 +112,10 @@ final class Client
     /**
      * @param callable $responseCallback
      * @param callable $errorCallback
+     * @param array<string,mixed> $options
      * @param Request[] $requests
      */
-    public function run(callable $responseCallback, ?callable $errorCallback, Request... $requests) : void
+    public function run(callable $responseCallback, ?callable $errorCallback, array $options, Request... $requests) : void
     {
         if (empty($requests)) {
             return;
@@ -153,7 +128,7 @@ final class Client
         $queue = new SimpleQueueingService();
         $queue->addMessages($messages);
 
-        $this->process($queue, $responseCallback, $errorCallback);
+        $this->process($queue, $responseCallback, $errorCallback, $options);
     }
 
     /**
@@ -186,10 +161,8 @@ final class Client
         /**
          * @yield PromiseInterface
          */
-        $getPromises = function () use ($queue, $client, $messages) {
+        $getPromises = function () use ($options, $queue, $client, $messages) {
             foreach ($messages as $message) {
-                $options = $this->getOptions();
-
                 if ($proxy = $this->getRandomProxy()) {
                     $options[RequestOptions::PROXY] = (string) $proxy;
                 }
