@@ -168,9 +168,9 @@ final class Client
                 }
 
                 if ($queue->deleteMessage($message)) {
-                    $this->getLoggingServiceContainer()->log("
-                        Deleted message {$message->getIdentifier()} from queue {$queue->getIdentifier()}
-                    ");
+                    $this->getLoggingServiceContainer()->log(
+                        "Deleted message {$message->getIdentifier()} from queue {$queue->getIdentifier()}"
+                    );
                 }
 
                 /** @var Request $request */
