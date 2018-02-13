@@ -1,5 +1,4 @@
 language: php
-install: make
-script: make && make test
+script: phpunit src/Centipede/Test/
 php:
   - '7.1'
