@@ -1,4 +1,5 @@
 language: php
+install: make
 script: make test
 php:
   - '7.1'
