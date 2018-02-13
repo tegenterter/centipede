@@ -1,5 +1,5 @@
 language: php
 install: composer install
-script: phpunit src/Centipede/Test/
+script: ./vendor/bin/phpunit src/Centipede/Test/
 php:
   - '7.1'
