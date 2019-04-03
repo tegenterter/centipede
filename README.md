@@ -1,1 +1,1 @@
-[![Build Status](https://travis-ci.org/thibaut-vandenbussche/centipede.svg?branch=master)](https://travis-ci.org/thibaut-vandenbussche/centipede)
+[![Build Status](https://travis-ci.org/tegenterter/centipede.svg?branch=master)](https://travis-ci.org/tegenterter/centipede)
