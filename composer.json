@@ -20,7 +20,7 @@
         "phpunit/phpunit": "^6"
     },
     "dist": {
-        "url": "git@github.com:thibaut-vandenbussche/centipede.git",
+        "url": "git@github.com:tegenterter/centipede.git",
         "type": "git"
     },
     "autoload": {
